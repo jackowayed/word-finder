@@ -1,9 +1,13 @@
-export interface Filter {
-  filterWords(input: string[]): string[];
+export abstract class Filter {
+  filterWords(input: string[]): string[] {
+    return input.filter(this.filterWord);
+  }
+
+  abstract filterWord(word: string): boolean;
 };
 
-export class IdentityFilter {
-  filterWords(input: string[]): string[] {
-    return input;
+export class IdentityFilter extends Filter {
+  filterWord(word: string): boolean {
+    return true;
   }
 }
